@@ -6,16 +6,21 @@ def get_weather(point):
        "q": "",
        "T": "",
        "n": "",
-       "mM": "",
+       "M": "",
        "lang": "ru"
     }
-    url = 'https://wttr.in/'
-    point_url = f'{url}{point}'
-    response = requests.get(point_url, params=params)
+    url = f'https://wttr.in/{point}'
+    response = requests.get(url, params=params)
     response.raise_for_status()
-    print(response.text)
+    return response.text
 
 
-get_weather('Лондон')
-get_weather('SVO')
-get_weather('Череповец')
+def print_weather():
+    points = ['Лондон', 'SVO', 'Череповец']
+    for point in points:
+        print(get_weather(point))
+
+
+if __name__ == '__main__':
+    print_weather()
+
